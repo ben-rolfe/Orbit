@@ -1,0 +1,150 @@
+fileFormatVersion: 2
+guid: 09286513e31efc548b91263b290f4b85
+timeCreated: 1457583016
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Factory Conveyor_0
+    21300002: Factory Conveyor_1
+    21300004: Factory Conveyor_2
+    21300006: Factory Conveyor_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 75
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Factory Conveyor_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 186
+        width: 797
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 373.5, y: -30}
+        - {x: 382.5, y: -22}
+        - {x: 397.5, y: 6}
+        - {x: 397.5, y: 22}
+        - {x: 386.5, y: 31}
+        - {x: -375.5, y: 31}
+        - {x: -396.5, y: 2}
+        - {x: -396.5, y: -19}
+        - {x: -388.5, y: -30}
+        - {x: -37.5, y: -30}
+        - {x: -26.5, y: -29}
+        - {x: 30.5, y: -30}
+    - name: Factory Conveyor_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 124
+        width: 797
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 389.5, y: -28}
+        - {x: 397.5, y: 6}
+        - {x: 397.5, y: 24}
+        - {x: 383.5, y: 31}
+        - {x: -365.5, y: 31}
+        - {x: -381.5, y: 27}
+        - {x: -396.5, y: 2}
+        - {x: -396.5, y: -20}
+        - {x: -391.5, y: -30}
+        - {x: 382.5, y: -30}
+    - name: Factory Conveyor_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 62
+        width: 797
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 385.5, y: -24}
+        - {x: 397.5, y: 5}
+        - {x: 397.5, y: 23}
+        - {x: 390.5, y: 30}
+        - {x: 384.5, y: 31}
+        - {x: -351.5, y: 31}
+        - {x: -385.5, y: 30}
+        - {x: -396.5, y: -2}
+        - {x: -396.5, y: -25}
+        - {x: -388.5, y: -30}
+        - {x: 375.5, y: -30}
+    - name: Factory Conveyor_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 797
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 348.5, y: -29}
+        - {x: 347.5, y: -30}
+        - {x: 370.5, y: -30}
+        - {x: 380.5, y: -29}
+        - {x: 397.5, y: 2}
+        - {x: 397.5, y: 23}
+        - {x: 383.5, y: 31}
+        - {x: -374.5, y: 31}
+        - {x: -396.5, y: 1}
+        - {x: -396.5, y: -19}
+        - {x: -390.5, y: -30}
+        - {x: 216.5, y: -30}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
