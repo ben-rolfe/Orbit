@@ -408,8 +408,8 @@ public class GameController : MonoBehaviour
 			new ScriptLine("560_4", "adult5", "Let's go see Tau. He'll know what we can do to stop the robots.");
 			new ScriptLine("570_1", "child", "The door won't open! We're trapped! Sammy? I think I did something bad...");
 			new ScriptLine("570_2", "adult5", "Not at all! Epsilon told you to build the wrong kind of robots and now they're causing the doors and the elevators to malfunction!");
-			new ScriptLine("570_3", "sammy", "If you were given the wrong blueprints, you couldn't have known what was going to happen! It's not your fault, but I'm glad you told someone.");
-			new ScriptLine("570_4", "sammy", "I think it's time for me to tell someone what happened, too. I want to tell Chi and the others, but... I'm afraid. Will you go with me?");
+			new ScriptLine("570_3", "sammyTeleporter", "If you were given the wrong blueprints, you couldn't have known what was going to happen! It's not your fault, but I'm glad you told someone.");
+			new ScriptLine("570_4", "sammyTeleporter", "I think it's time for me to tell someone what happened, too. I want to tell Chi and the others, but... I'm afraid. Will you go with me?");
 			new ScriptLine("570_5", "child", "But we're stuck!");
 			new ScriptLine("570_6", "adult5", "Sammy, can you stop the robots?");
 			new ScriptLine("570_7", "sammyTeleporter", "Of course! There, they've stopped. I'll activate the emergency door release system.");
@@ -585,8 +585,8 @@ public class GameController : MonoBehaviour
 
 			//DECORATOR
 			new ScriptLine("decorator_help_01", "communicator", "When you have finished decorating your room, press the communicator to open the menu.");
-			new ScriptLine("decorator_help_02", "colours", "You can decorate your walls, here.");
-			new ScriptLine("decorator_help_03", "exit", "When you have finished decorating your room, press the ship icon to return to the ship.");
+			new ScriptLine("decorator_help_02", "wallColorHelp", "You can decorate your walls, here.");
+			new ScriptLine("decorator_help_03", "shipButton", "When you have finished decorating your room, press the ship icon to return to the ship.");
 
 			//FACTORY
 			new ScriptLine("factory_01", "tau", "I'll show you how the machine works, then I'll leave you to it.");
@@ -705,17 +705,6 @@ public class GameController : MonoBehaviour
 			new ScriptLine("unscrambler_help_moved|3", "slotHelp3", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
 
 
-
-
-
-
-
-
-
-
-
-
-
 			/*
 			//UNCOMMENT THIS TO FIND MISSING AUDIO LINES
 			foreach (string key in lines.Keys)
@@ -782,7 +771,7 @@ public class GameController : MonoBehaviour
 				o.SetActive(false);
 				foreach (TestInt test in o.GetComponentsInChildren<TestInt>(true))
 				{
-					Debug.Log(test.gameObject);
+//					Debug.Log(test.gameObject);
 					tests.Add(test);
 				}
 			}
@@ -914,6 +903,7 @@ public class GameController : MonoBehaviour
 	}
 	public void LoadClassifier()
 	{
+		Debug.Log("LEVEL: " + PickLevel(GameController.GetInt("classifier_completed"), 8));
 		LoadClassifier(PickLevel(GameController.GetInt("classifier_completed"), 8));
 	}
 	public void LoadClassifier(int level)
@@ -924,7 +914,18 @@ public class GameController : MonoBehaviour
 	}
 	public void LoadUnscrambler()
 	{
-		//TODO: Based on checkpoint
+		if (GameController.GetInt("Checkpoint") < 400)
+		{
+			LoadUnscrambler(0);
+		}
+		else if (GameController.GetInt("Checkpoint") < 430)
+		{
+			LoadUnscrambler(1);
+		}
+		else
+		{
+			LoadUnscrambler(2);
+		}
 	}
 	public void LoadUnscrambler(int level)
 	{
@@ -1004,7 +1005,22 @@ public class GameController : MonoBehaviour
 				DisplayReward(direction.Substring(1));
 				break;
 			case "@": //Load Scene
-				LoadScene(direction.Substring(1));
+				switch (direction.Substring(1))
+				{
+					case "Factory":
+						LoadFactory();
+						break;
+					case "Classifier":
+						LoadClassifier();
+						break;
+					case "Unscrambler":
+						LoadUnscrambler();
+						break;
+					default:
+						LoadScene(direction.Substring(1));
+						break;
+
+				}
 				NextLine();
 				break;
 			case "#": //Set Checkpoint

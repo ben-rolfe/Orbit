@@ -19,6 +19,8 @@ public class Unscrambler : MonoBehaviour {
 
 	public void Setup()
 	{
+		UnscramblerAvatar unscramblerAvatar = FindObjectOfType<UnscramblerAvatar>();
+
 		switch (GameController.GetInt("unscrambler_level"))
 		{
 			case 0:
@@ -50,10 +52,15 @@ public class Unscrambler : MonoBehaviour {
 		{
 			frames[i] = Instantiate<UnscramblerFrame>(framePrefab);
 			frames[i].clip = clips[i];
-			frames[i].anim = GameObject.Find("clip" + clips[i]).GetComponent<Animator>();
+			Debug.Log(GameObject.Find("clip" + clips[i]));
+			Debug.Log(GameObject.Find("clip" + clips[i]).GetComponent<Animator>());
+			//			frames[i].anim = GameObject.Find("clip" + clips[i]).GetComponent<Animator>();
+			//			frames[i].animLength = frames[i].anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+			frames[i].anim = unscramblerAvatar.anims[clips[i]];
 			frames[i].animLength = frames[i].anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-
+			
 			Camera clipCamera = Instantiate<Camera>(cameraPrefab);
+			Debug.Log(GameObject.Find("clip" + clips[i]).transform.localPosition + Vector3.back * 10f);
 			clipCamera.transform.position = frames[i].anim.transform.position + Vector3.back * 10f;
 			RenderTexture frameTexture = new RenderTexture(480, 320, 24);
 			clipCamera.targetTexture = frameTexture;
@@ -78,6 +85,13 @@ public class Unscrambler : MonoBehaviour {
 	}
 
 	public void Watch () {
+		//Can't do this in setup, because the animators aren't ready, and return null :/
+/*		for (int i = 0; i < clips.Length; i++)
+		{
+			frames[i].anim = GameObject.Find("clip" + clips[i]).GetComponent<Animator>();
+			frames[i].animLength = frames[i].anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+		}
+		*/
 		bool ready = true;
 		foreach (UnscramblerSocket socket in sockets)
 		{

@@ -14,19 +14,19 @@ public class ButtonHandler : MonoBehaviour {
 	}
 	public void LoadFactory()
 	{
-		LoadFactory();
+		GameController.singleton.LoadFactory();
 	}
 	public void LoadClassifier()
 	{
-		LoadFactory();
+		GameController.singleton.LoadClassifier();
 	}
 	public void LoadUnscrambler()
 	{
-		LoadFactory();
+		GameController.singleton.LoadUnscrambler();
 	}
 	public void LoadVR()
 	{
-		LoadVR();
+		GameController.singleton.LoadVR();
 	}
 
 }

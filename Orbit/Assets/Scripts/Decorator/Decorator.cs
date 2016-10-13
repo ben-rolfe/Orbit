@@ -18,5 +18,9 @@ public class Decorator : MonoBehaviour {
 		loungeButton.interactable = false;
 		Camera.main.transform.position = new Vector3(9.4f, 0f, -10f);
 	}
+	public void SetColor(string hexCode)
+	{
+
+	}
 
 }

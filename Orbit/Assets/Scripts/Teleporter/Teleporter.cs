@@ -15,23 +15,20 @@ public class Teleporter : MonoBehaviour {
 	[SerializeField] Button femaleButton;
 	[SerializeField] InputField nameText;
 
-	// Use this for initialization
-	void Start () {
+
+	public void Setup()
+	{
 		if (GameController.GetInt("teleporter_level") == 0)
 		{
 			charactor = "child";
 		}
 		else
 		{
-			charactor = "adult" + GameController.GetInt("teleporter_level").ToString();
+			charactor = "adult" + GameController.GetInt("teleporter_level");
 		}
+		Debug.Log("TEST");
 		Debug.Log(charactor);
 		SetCharactor(charactor);
-	}
-
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	public void SetCharactor(string charactor)

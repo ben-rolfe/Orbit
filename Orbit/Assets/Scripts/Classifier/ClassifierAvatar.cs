@@ -5,7 +5,10 @@ public class ClassifierAvatar : MonoBehaviour {
 
 	void Start () {
 		GameController.singleton.SetOverlay("Classifier Overlay");
-		FindObjectOfType<Classifier>().Setup();
+		//		Invoke("Setup", 1000);
+		GameController.singleton.GetComponentInChildren<Classifier>().Setup();
 	}
-	
+
+
+
 }

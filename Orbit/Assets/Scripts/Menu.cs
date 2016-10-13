@@ -103,6 +103,7 @@ public void NewGame()
 			GameController.SetColor(charactor + "_skin", Teleporter.HexToColor("995533"));
 			GameController.SetColor(charactor + "_top", Teleporter.HexToColor("660033"));
 			GameController.SetColor(charactor + "_legs", Teleporter.HexToColor("9999FF"));
+			GameController.SetInt(charactor + "_voice", 1);
 			GameController.SetInt(charactor + "_hair", 1);
 			GameController.SetInt(charactor + "_brows", 0);
 			GameController.SetInt(charactor + "_eyes", 0);
