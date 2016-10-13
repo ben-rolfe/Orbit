@@ -106,15 +106,27 @@ public class Classifier : MonoBehaviour {
 			//If this is not a re-classification (coming back from sorter), then play the intro
 			string debriefStub = "classifier_debrief_" + GameController.GetInt("classifier_level") + "_";
 			GameController.Directions(new string[] { debriefStub + "0", debriefStub + "1", debriefStub + "2" });
+			if (GameController.GetInt("classifier_level") == 0)
+			{
+				GameController.Directions(new string[] { "classifier_help_01", "classifier_help_02", "classifier_help_03" });
+			}
+		}
+		else
+		{
+			GameController.Directions(new string[] { "classifier_help_04" });
 		}
 		for (int i = 0; i < 8; i++)
 		{
-			//If this is not a re-classification (coming back from sorter), then clear old answers
-			if (GameController.GetString("prevScene") != "Sorter") 
+			//If this is not a re-classification (coming back from sorter), then clear old answers. If this is a reclassification, and the answer is incorrect, clear it.
+			if (GameController.GetString("prevScene") != "Sorter" || GameController.GetBool("classifier_answer_" + i) != GameController.GetBool("classifier_response_" + i))
 			{
+				GameController.SetBool("classifier_classified_" + i, false);
 				GameController.SetBool("classifier_response_" + i, false);
 				GameController.SetInt("classifier_type_" + i, clips[GameController.GetInt("classifier_level"), i].clipType);
 				GameController.SetBool("classifier_answer_" + i, clips[GameController.GetInt("classifier_level"), i].needToTell);
+				ColorBlock colors = buttons[i].colors;
+				colors.normalColor = colors.highlightedColor = new Color(1f, 0.4f, 0f);
+				buttons[i].colors = colors;
 			}
 			flags[i].enabled = GameController.GetBool("classifier_response_" + i);
 			icons[i].sprite = iconSprites[clips[GameController.GetInt("classifier_level"), i].clipType];
@@ -125,10 +137,10 @@ public class Classifier : MonoBehaviour {
 	public void SelectClip(int clip)
 	{
 		ColorBlock colors;
-		if (selectedClip > 0)
+		if (selectedClip > -1)
 		{
 			colors = buttons[selectedClip].colors;
-			colors.normalColor = colors.highlightedColor = new Color(0.4f, 0.8f, 1f);
+			colors.normalColor = colors.highlightedColor = (GameController.GetBool("classifier_classified_" + selectedClip)) ? new Color(0.4f, 0.8f, 1f) : new Color(1f, 0.4f, 0f);
 			buttons[selectedClip].colors = colors;
 		}
 		heading.text = clips[GameController.GetInt("classifier_level"), clip].heading;
@@ -154,9 +166,10 @@ public class Classifier : MonoBehaviour {
 
 	public void SetNeedToTell(bool value)
 	{
-		if (selectedClip > 0)
+		GameController.SetBool("classifier_classified_" + selectedClip, true);
+		if (selectedClip > -1)
 		{
-			GameController.SetBool("classifier_response_" + selectedClip, false);
+			GameController.SetBool("classifier_response_" + selectedClip, value);
 			flags[selectedClip].enabled = value;
 		}
 

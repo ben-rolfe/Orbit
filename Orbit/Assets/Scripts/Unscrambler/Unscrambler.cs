@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class Unscrambler : MonoBehaviour {
@@ -14,13 +15,27 @@ public class Unscrambler : MonoBehaviour {
 	UnscramblerFrame[] frames;
 
 	int watchingSocket;
+	List<string> helpDirections;
 
 	public void Setup()
 	{
-		solutions = new int[] { 0, 1, 2 };
+		switch (GameController.GetInt("unscrambler_level"))
+		{
+			case 0:
+				solutions = new int[] { 0, 1, 2 };
 				clips = new int[] { 0, 10, 2, 11, 1, 12 };
-		//solutions = new int[] { 6, 7, 8, 9 };
-		//clips = new int[] { 6, 15, 14, 7, 8, 11, 9, 12 };
+				break;
+			case 1:
+				solutions = new int[] { 3, 4, 5 };
+				clips = new int[] { 13, 11, 12, 4, 3, 10, 5 };
+				break;
+			default:
+				solutions = new int[] { 6, 7, 8, 9 };
+				clips = new int[] { 6, 15, 14, 7, 8, 11, 9, 12 };
+				break;
+
+		}
+
 		watchingSocket = -1;
 
 		sockets = new UnscramblerSocket[solutions.Length];
@@ -58,6 +73,8 @@ public class Unscrambler : MonoBehaviour {
 			}
 		}
 
+		GameController.Directions(new string[] { "unscrambler_help_intro" });
+//		GameController.Directions(new string[] { "unscrambler_help_intro", "unscrambler_help_original|0" });
 	}
 
 	public void Watch () {
@@ -89,6 +106,7 @@ public class Unscrambler : MonoBehaviour {
 				delay += sockets[i].socketed.animLength;
 				Invoke("MoveCamera", delay);
 			}
+
 		}
 	}
 	public void MoveCamera()
@@ -106,29 +124,53 @@ public class Unscrambler : MonoBehaviour {
 		{
 			Camera.main.orthographicSize = 2f;
 			Camera.main.transform.position = Vector3.back * 10f;
-			//TODO: Reinstate dragging priveleges.
 			bool finished = true;
+			if (GameController.GetInt("unscrambler_level") == 0)
+			{
+				helpDirections = new List<string>();
+			}
 
 			for (int i = 0; i < sockets.Length; i++)
 			{
-				//Set diagnostic sprite
-				sockets[i].socketed.diagnostic.sprite = diagnosticSprites[(solutions[i] == sockets[i].socketed.clip) ? 0 : ((solutions.Contains<int>(sockets[i].socketed.clip)) ? 1 : 2)];
-				//If socketed frame is correct, lock it in.
-				if (sockets[i].socketed.diagnostic.sprite != diagnosticSprites[0])
+
+				int diagnosis = (solutions[i] == sockets[i].socketed.clip) ? 0 : ((solutions.Contains<int>(sockets[i].socketed.clip)) ? 1 : 2);
+				if (GameController.GetInt("unscrambler_level") == 0)
 				{
+					switch (diagnosis)
+					{
+						case 0:
+							helpDirections.Add("unscrambler_help_original|" + i);
+							break;
+						case 1:
+							helpDirections.Add("unscrambler_help_moved|" + i);
+							break;
+						case 2:
+							helpDirections.Add("unscrambler_help_edited|" + i);
+							helpDirections.Add("unscrambler_help_clips");
+							break;
+					}
+				}
+				//Set diagnostic sprite
+				sockets[i].socketed.diagnostic.sprite = diagnosticSprites[diagnosis];
+				if (diagnosis != 0)
+				{
+					//If socketed frame is incorrect, reinstate dragging privelege
 					sockets[i].GetComponent<BoxCollider2D>().enabled = true;
 					sockets[i].socketed.GetComponent<BoxCollider2D>().enabled = true;
-				}
-				else
-				{
 					finished = false;
 				}
 
 			}
 			GameController.singleton.SetOverlay("Unscrambler Overlay");
+
 			if (finished)
 			{
-				//TODO: WIN
+				GameController.CompleteLevel("unscrambler", GameController.GetInt("unscrambler_level"));
+				GameController.singleton.LoadScene("ShipMiddle");
+			}
+			else if (GameController.GetInt("unscrambler_level") == 0)
+			{
+				GameController.Directions(helpDirections.ToArray());
 			}
 		}
 

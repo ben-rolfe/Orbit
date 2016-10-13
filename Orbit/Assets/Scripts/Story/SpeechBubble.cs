@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class SpeechBubble : MonoBehaviour {
 	public Transform speaker;
 	public bool inFront;
-	public Vector3 offset;
-	private Vector3 flippedOffset;
+//	public Vector3 offset;
+//	private Vector3 flippedOffset;
 	private Vector3 scale;
 	private Vector3 flippedScale;
 	private Text textBox;
@@ -16,7 +16,7 @@ public class SpeechBubble : MonoBehaviour {
 	{
 		yScale = transform.localScale.y;
 		textBox = GetComponentInChildren<Text>();
-		flippedOffset = new Vector3(-offset.x, offset.y, offset.z);
+//		flippedOffset = new Vector3(-offset.x, offset.y, offset.z);
 		if (inFront)
 		{
 			scale = new Vector3(-1f, yScale, 1f);
@@ -34,12 +34,12 @@ public class SpeechBubble : MonoBehaviour {
 	void Update () {
 		if (speaker.localScale.x > 0)
 		{
-			transform.position = speaker.position + offset;
+			transform.position = speaker.position;
 			textBox.transform.localScale = transform.localScale = scale;
 		}
 		else
 		{
-			transform.position = speaker.position + flippedOffset;
+			transform.position = speaker.position;
 			textBox.transform.localScale = transform.localScale = flippedScale;
 		}
 	}

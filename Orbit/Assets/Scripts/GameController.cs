@@ -412,8 +412,8 @@ public class GameController : MonoBehaviour
 			new ScriptLine("570_4", "sammy", "I think it's time for me to tell someone what happened, too. I want to tell Chi and the others, but... I'm afraid. Will you go with me?");
 			new ScriptLine("570_5", "child", "But we're stuck!");
 			new ScriptLine("570_6", "adult5", "Sammy, can you stop the robots?");
-			new ScriptLine("570_7", "sammy", "Of course! There, they've stopped. I'll activate the emergency door release system.");
-			new ScriptLine("570_8", "sammy", "Throughout the ship you'll find red buttons. Pressing these buttons should re-activate the doors and elevators.");
+			new ScriptLine("570_7", "sammyTeleporter", "Of course! There, they've stopped. I'll activate the emergency door release system.");
+			new ScriptLine("570_8", "sammyTeleporter", "Throughout the ship you'll find red buttons. Pressing these buttons should re-activate the doors and elevators.");
 			new ScriptLine("570_9", "adult5", "Let's find that red button so we can get out of here!");
 			new ScriptLine("580_1", "adult5", "Got it?");
 			new ScriptLine("580_2", "child", "Got it!");
@@ -422,8 +422,8 @@ public class GameController : MonoBehaviour
 			new ScriptLine("590_3", "adult5", "I'm glad that Sammy has decided to tell her trusted adults that Epsilon was abusing her. Now they can keep her safe.", "I'm glad that Sammy has decided to tell his trusted adults that Epsilon was abusing him. Now they can keep him safe.");
 			new ScriptLine("590_4", "adult5", "Remember, if you ever want to talk about anything, big or small, you can always talk to me, and your other trusted adults, too.");
 			new ScriptLine("590_5", "child", "Thanks. I know that now.");
-			new ScriptLine("590_6", "sammy", "When I told Tau, he understood and said he would help keep me safe.");
-			new ScriptLine("590_7", "sammy", "I was scared that when I told people, they might not understand. I'd like to talk to Zeta now. I think she's in the cargo bay.");
+			new ScriptLine("590_6", "sammyFactory", "When I told Tau, he understood and said he would help keep me safe.");
+			new ScriptLine("590_7", "sammyFactory", "I was scared that when I told people, they might not understand. I'd like to talk to Zeta now. I think she's in the cargo bay.");
 			new ScriptLine("600_1", "child", "Zeta's a really good listener. I'm glad Sammy has someone like that to talk to.");
 			new ScriptLine("600_2", "adult5", "Some things can be very hard to say. But the things that are really hard to talk about are the things we definitely need to discuss.");
 			new ScriptLine("600_3", "sammy", "When I told Zeta, she listened and said she would help keep me safe.");
@@ -436,8 +436,8 @@ public class GameController : MonoBehaviour
 			new ScriptLine("620_2", "adult5", "Sometimes things can seem that way. We get worried about all the things that could go wrong.");
 			new ScriptLine("620_3", "adult5", "But that's exactly why we need to talk about the things that worry us, or confuse us.");
 			new ScriptLine("620_4", "child", "Sammy knows that now."); //or child?
-			new ScriptLine("620_5", "sammy", "Yes, I do. When I told Rho, she believed me, and said she would help keep me safe.");
-			new ScriptLine("620_6", "sammy", "I'd like to talk to Delta next.");
+			new ScriptLine("620_5", "sammySurveillance", "Yes, I do. When I told Rho, she believed me, and said she would help keep me safe.");
+			new ScriptLine("620_6", "sammySurveillance", "I'd like to talk to Delta next.");
 			new ScriptLine("620_7", "adult5", "There are so many red buttons in here! Which one unlocks the door?");
 			new ScriptLine("620_8", "child", "I'll find it!");
 			new ScriptLine("630_1", "child", "This looks like the right button!");
@@ -445,10 +445,10 @@ public class GameController : MonoBehaviour
 			new ScriptLine("640_1", "child", "I'm so glad Sammy decided to tell Delta that she was being abused. I know she was worried that Delta wouldn't be there for her.", "I'm so glad Sammy decided to tell Delta that he was being abused. I know he was worried that Delta wouldn't be there for him.");
 			new ScriptLine("640_2", "adult5", "She's there for her now! And even if Delta's not around, Sammy has other trusted adults she can talk to, as well.", "She's there for him now! And even if Delta's not around, Sammy has other trusted adults he can talk to, as well.");
 			new ScriptLine("640_3", "adult5", "That's why it's a good idea to have trusted adults at home, school, and other places! Someone will always be around!");
-			new ScriptLine("640_4", "sammy", "When I told Delta, she was there for me and said she would help keep me safe.");
-			new ScriptLine("640_5", "sammy", "I've been really worried that when I told people, they might not stand up for me. I'd like to talk to Chi now.");
+			new ScriptLine("640_4", "sammyLab", "When I told Delta, she was there for me and said she would help keep me safe.");
+			new ScriptLine("640_5", "sammyLab", "I've been really worried that when I told people, they might not stand up for me. I'd like to talk to Chi now.");
 			new ScriptLine("640_6", "adult5", "About the red button to reactivate the elevator...");
-			new ScriptLine("640_7", "sammy", "I think it's in my room.");
+			new ScriptLine("640_7", "sammyLab", "I think it's in my room.");
 			new ScriptLine("640_8", "child", "Let's go!");
 			//Both lines at 650 are reused lines
 			new ScriptLine("660_1", "child", "Sammy was worried that Chi wouldn't stand up for her.", "Sammy was worried that Chi wouldn't stand up for him.");
@@ -583,6 +583,11 @@ public class GameController : MonoBehaviour
 			new ScriptLine("teleporter_03", "child", "A trusted adult, who's not from my family, or from school...");
 			new ScriptLine("teleporter_04", "child", "Rho didn't say where my next trusted adult had to be from, so I can beam in someone from my family, school, or anywhere else!");
 
+			//DECORATOR
+			new ScriptLine("decorator_help_01", "communicator", "When you have finished decorating your room, press the communicator to open the menu.");
+			new ScriptLine("decorator_help_02", "colours", "You can decorate your walls, here.");
+			new ScriptLine("decorator_help_03", "exit", "When you have finished decorating your room, press the ship icon to return to the ship.");
+
 			//FACTORY
 			new ScriptLine("factory_01", "tau", "I'll show you how the machine works, then I'll leave you to it.");
 			new ScriptLine("factory_02", "tau", "Here's a blueprint to practice on.");
@@ -617,6 +622,11 @@ public class GameController : MonoBehaviour
 			new ScriptLine("factory_multirobots", "tau", "This time, each robot you place in the paint queue will be replaced by a fresh blueprint, if there are more robots to make.");
 
 			//CLASSIFIER
+			new ScriptLine("classifier_help_01", "messagesHelp", "This is the classifier. Press on a message to listen to it.");
+			new ScriptLine("classifier_help_02", "needToTell", "Then press either \"need to tell\" or \"do not need to tell\" to train the machine");
+			new ScriptLine("classifier_help_03", "needToTell", "Once you've finished all the training messages, press \"done\" to start the message sorter");
+			new ScriptLine("classifier_help_04", "messagesHelp", "The messages that were incorrectly classified have been highlighted. Reclassify them, then press \"done\".");
+
 			new ScriptLine("classifier_debrief_0_0", "rhoClassifier", "The \"Need to Tell\" stories in this training level were examples of bribes.");
 			new ScriptLine("classifier_debrief_0_1", "rhoClassifier", "A bribe is when someone offers something like money, gifts or other treats so someone else will do what they want.");
 			new ScriptLine("classifier_debrief_0_2", "rhoClassifier", "If someone ever tries to bribe you into breaking the body rules, tell your trusted adults immediately!");
@@ -645,7 +655,25 @@ public class GameController : MonoBehaviour
 			new ScriptLine("classifier_debrief_8_1", "rhoClassifier", "Everyone wants to feel special, and there's nothing wrong with that. However, sometimes people who want to break the body rules will try to convince the child that what they're doing is okay because they love them or care about them.");
 			new ScriptLine("classifier_debrief_8_2", "rhoClassifier", "If someone treats you this way in order to break the body rules, that's not okay, and you need to tell your trusted adults!");
 
+			//SORTER
+			new ScriptLine("sorter_help_flagged", "sortButtons", "This is the sorter. When a message with a \"need to tell\" flag comes down the tube, hit the button to send it to Rho and your trusted adult.");
+			new ScriptLine("sorter_help_hit", "sortButtons", "Press now!");
+			new ScriptLine("sorter_help_miss", "sortButtons", "If you miss too many \"need to tell\" messages, Sammy will get sad, and we'll need to restart the sorter.");
+			new ScriptLine("sorter_help_unflagged", "sortButtons", "You don't need to send unflagged messages to them, but it's okay if you do. You can talk to your trusted adults about anything.");
+			new ScriptLine("sorter_help_reclassify", "sortButtons", "It seems that some messages have been classified incorrectly.");
+
 			//VR GAME
+			new ScriptLine("vr_help_01", "childControls", "These controls move the child");
+			new ScriptLine("vr_help_02", "adultControls", "And these move the adult");
+			new ScriptLine("vr_help_03", "wall", "The goal of the game is to break down the emotional barrier that is stopping the child from talking to their trusted adults.");
+			new ScriptLine("vr_help_04", "toy", "To do this, you need to get to this toy.");
+			new ScriptLine("vr_help_05", "understanding", "These are the special qualities of trusted adults. You need to use them to win the game.");
+			new ScriptLine("vr_help_06", "understanding", "This is \"understanding\". Hold it down to let the child jump onto the adult's shoulders, to reach high ledges, and get out of holes.");
+			new ScriptLine("vr_help_07", "togetherness", "This is \"togetherness\". Press it to move the adult to where the child is standing.");
+			new ScriptLine("vr_help_08", "listening", "This is \"listening\". Press it when the child is near a toy to break down the emotional barrier.");
+			new ScriptLine("vr_help_09", "believing", "This is \"believing\". Hold it down to let the child walk through scary places.");
+			new ScriptLine("vr_help_10", "courage", "This is \"courage\". Hold it down to let the adult walk through scary places.");
+
 			new ScriptLine("vr_0_01", "vr1", "Hi Grandma, Hi Grandad");
 			new ScriptLine("vr_0_02", "vr2", "Gwethana! It's so good to see you! Your father's really been enjoying your weekend visits.");
 			new ScriptLine("vr_0_03", "vr3", "Your dad says you're starting to warm up to your new step-brother, too.");
@@ -659,6 +687,33 @@ public class GameController : MonoBehaviour
 			new ScriptLine("vr_0_11", "currentAdult", "If Yerpal gets angry, it's because he knows he's doing something wrong. Gwethana has to tell her trusted adults, so they can keep her safe");
 			new ScriptLine("vr_0_12", "child", "Gwethana is amazing! She told her grandparents what's been happening, even though she was really scared.");
 			new ScriptLine("vr_0_13", "currentAdult", "Now that she's told someone, they help keep her safe, and make sure that she can have fun visiting her dad, without having to be afraid.");
+
+			//UNSCRAMBLER
+			new ScriptLine("unscrambler_help_intro", "watchButton", "This video has been scrambled. Press the watch button to see what's wrong with it.");
+			new ScriptLine("unscrambler_help_original|0", "slotHelp0", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|1", "slotHelp1", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|2", "slotHelp2", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|3", "slotHelp3", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_edited|0", "slotHelp0", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|1", "slotHelp1", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|2", "slotHelp2", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|3", "slotHelp3", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_clips", "clipsArea", "Drag one of these clips into the timeline to replace it, then press \"watch\" again.");
+			new ScriptLine("unscrambler_help_moved|0", "slotHelp0", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|1", "slotHelp1", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|2", "slotHelp2", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|3", "slotHelp3", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+
+
+
+
+
+
+
+
+
+
+
 
 
 			/*
@@ -762,11 +817,11 @@ public class GameController : MonoBehaviour
 			// Freeze time when opening the menu of a time-sensitive minigame. This means we can't do some things that rely on time, like speech triggers
 			if (_overlay == "Factory Menu" || _overlay == "Sorter Menu")
 			{
-				Time.timeScale = 0f;
+				Time.timeScale = 0f; // Freeze time when opening the menu of a time-sensitive minigame.
 			}
 			else
 			{
-				Time.timeScale = 1f; // Freeze time when opening the menu of a time-sensitive minigame.
+				Time.timeScale = 1f; // Unfreeze time
 				Invoke("FireOverlayTriggers", 0.1f); //Wait briefly after activating the layer, and before firing overlay triggers, or some of the internal objects won't be found by Find operations.
 			}
 		}
@@ -795,7 +850,7 @@ public class GameController : MonoBehaviour
 
 	}
 
-	public void StartGame()
+/*	public void StartGame()
 	{
 		StartGame("test");
 	}
@@ -803,7 +858,7 @@ public class GameController : MonoBehaviour
 	{
 		FindObjectOfType<Menu>().StartGame(slot);
 	}
-
+	*/
 	//When called with no parameter, toggles back to prevScene. Unless called from MainMenu
 	public void LoadScene()
 	{

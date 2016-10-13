@@ -57,7 +57,7 @@ public class SpeakingCharacter : MonoBehaviour {
 		}
 		else
 		{
-			Debug.LogWarning("No audio clip!");
+			Debug.LogWarning("No audio clip: " + clipName);
 			Unspeak();
 		}
 

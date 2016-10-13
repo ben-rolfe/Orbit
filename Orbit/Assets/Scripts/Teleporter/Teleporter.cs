@@ -13,6 +13,7 @@ public class Teleporter : MonoBehaviour {
 	[SerializeField] GameObject[] panels;
 	[SerializeField] Button maleButton;
 	[SerializeField] Button femaleButton;
+	[SerializeField] InputField nameText;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,7 @@ public class Teleporter : MonoBehaviour {
 		FindObjectOfType<TeleporterAvatar>().gameObject.name = charactor;
 		isAdult = charactor != "child";
 		SetIsMale(GameController.GetBool(charactor + "_isMale"));
+		nameText.text = GameController.GetString(charactor + "_name");
 		SetSubMenu();
 	}
 
@@ -139,5 +141,20 @@ public class Teleporter : MonoBehaviour {
 	public static Color HexToColor(string hexCode)
 	{
 		return new Color(int.Parse(hexCode.Substring(0, 2), System.Globalization.NumberStyles.HexNumber) / 255f, int.Parse(hexCode.Substring(2, 2), System.Globalization.NumberStyles.HexNumber) / 255f, int.Parse(hexCode.Substring(4, 2), System.Globalization.NumberStyles.HexNumber) / 255f);
+	}
+
+	public void SaveCharactor()
+	{
+		if (nameText.text == "")
+		{
+			ColorBlock colors = nameText.colors;
+			colors.normalColor = Color.red;
+			nameText.colors = colors;
+		}
+		else
+		{
+			GameController.SetString(charactor + "_name", nameText.text);
+			GameController.singleton.LoadScene("ShipBottom");
+		}
 	}
 }
