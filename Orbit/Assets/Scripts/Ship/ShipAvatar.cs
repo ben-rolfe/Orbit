@@ -9,6 +9,9 @@ public class ShipAvatar : MonoBehaviour
 	[SerializeField]
 	Slider movement;
 	[SerializeField] bool vr;
+	float runSpeed = 3f;
+	[SerializeField]
+	float jumpPower = 250f;
 
 	void Awake()
 	{
@@ -51,31 +54,46 @@ public class ShipAvatar : MonoBehaviour
 			Camera.main.transform.position = pos;
 		}
 
-		if (Input.GetAxis("Vertical") > 0)
-		{
-			Jump();
-		}
-
 	}
 	void FixedUpdate()
 	{
-		//TODO: Remove this code for mobile platforms (to disable movement opn mobile, we just remove controls)
+		//horizontalMovement = Input.GetAxis("Horizontal");
 		//Using isKinematic to disable physics
 		if (!rb.isKinematic && movement != null)
 		{
-			Vector3 vel = rb.velocity;
-			vel.x = ((movement.value != 0) ? movement.value : Input.GetAxis("Horizontal")) * 5f;
-			rb.velocity = vel;
+			float horizontalMovement = movement.value;
+//			horizontalMovement = Input.GetAxis("Horizontal");
+//			Debug.Log(horizontalMovement);
+			//TODO: simplify this when my brain is working.
+			if (horizontalMovement < 0f)
+			{
+				if (rb.velocity.x > horizontalMovement * runSpeed)
+				{
+					rb.AddForce(Vector3.right * horizontalMovement * Mathf.Abs(rb.velocity.x - horizontalMovement * runSpeed) * 100f);
+				}
+			}
+			else
+			{
+				if (rb.velocity.x < horizontalMovement * runSpeed)
+				{
+					rb.AddForce(Vector3.right * horizontalMovement * Mathf.Abs(rb.velocity.x - horizontalMovement * runSpeed) * 100f);
+				}
+			}
+		}
+
+		if (Input.GetAxis("Vertical") > 0)
+		{
+			Jump();
 		}
 	}
 
 	public void Jump()
 	{
-//		Debug.Log("jump");
-//		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")) && Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("Platforms")) != null) //Using isKinematic to disable physics
-		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")))
+		//		Debug.Log("jump");
+		//		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")) && Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("Platforms")) != null) //Using isKinematic to disable physics
+		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")) && rb.velocity.y <= 0) //y check is to avoid double boost
 		{
-				rb.velocity = new Vector2(rb.velocity.x, 5f);
+			rb.AddForce(Vector2.up * jumpPower);
 		}
 	}
 }

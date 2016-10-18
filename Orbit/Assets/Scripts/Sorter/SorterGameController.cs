@@ -27,19 +27,23 @@ public class SorterGameController : MonoBehaviour {
 				break;
 			case 1:
 			case 5:
-				Invoke("Complete", 74f); //track3
+				Invoke("Complete", 65f); //track0
+//				Invoke("Complete", 74f); //track3
 				break;
 			case 2:
 			case 6:
-				Invoke("Complete", 93f); //track2
+				Invoke("Complete", 65f); //track0
+//				Invoke("Complete", 93f); //track2
 				break;
 			case 3:
 			case 7:
-				Invoke("Complete", 103f); //track1
+				Invoke("Complete", 65f); //track0
+//				Invoke("Complete", 103f); //track1
 				break;
 			case 4:
 			case 8:
-				Invoke("Complete", 60f); //track4
+				Invoke("Complete", 65f); //track0
+//				Invoke("Complete", 60f); //track4
 				break;
 		}
 	}
