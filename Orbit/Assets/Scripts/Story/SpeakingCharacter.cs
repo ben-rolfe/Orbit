@@ -75,15 +75,19 @@ public class SpeakingCharacter : MonoBehaviour {
 
 	public void Clicked()
 	{
+		bool chat = true;
 		if (checkpoint < GameController.GetInt("Checkpoint"))
 		{
 			checkpoint = GameController.GetInt("Checkpoint");
 			foreach (StoryTrigger trigger in GetComponents<StoryTrigger>())
 			{
-				trigger.Trigger();
+				if (trigger.TriggerTest())
+				{
+					chat = false;
+				}
 			}
 		}
-		else if (chatLines.Length > 0) //have already spoken line for this checkpoint - pull a random chat line.
+		if (chat && chatLines.Length > 0) //have already spoken line for this checkpoint, or there isn't one - pull a random chat line.
 		{
 			GameController.Directions(new string[] { chatLines[Random.Range(0, chatLines.Length)] });
 		}

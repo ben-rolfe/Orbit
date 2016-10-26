@@ -12,13 +12,10 @@ public class Menu : MonoBehaviour
 	[SerializeField]
 	Button[] loadButtons;
 	bool overwriteMode = false;
-	ParticleSystem ps;
 
 	void Start()
 	{
 		overwriteMode = false;
-		ps = FindObjectOfType<ParticleSystem>();
-		ps.Stop();
 		continueButtonText.text = "Continue\n(" + GameController.GetString("child_name") + ")";
 
 	}
@@ -48,7 +45,7 @@ public void NewGame()
 	public void StartGame()
 	{
 		GameController.singleton.SetOverlay("None");
-		ps.Play();
+		FindObjectOfType<ParticleSystem>().Play();
 		Invoke((overwriteMode) ? "StartNewGame" : "StartExistingGame", 3f);
 	}
 	public void StartGame(string slot)
@@ -84,7 +81,13 @@ public void NewGame()
 	{
 		if (GameController.GetString("scene") == "")
 		{
+			//If scene hasn't been set, yet, the player hasn't made it through the teleporter, so we send them there.
 			GameController.SetString("scene", "Teleporter");
+		}
+		else if (!GameController.GetString("scene").StartsWith("Ship"))
+		{
+			//If scene isn't on ship (if it's a minigame, or the main menu) send them to the bottom of the ship instead. Not ideal, but avoids them getting stuck somewhere (esp. main menu).
+			GameController.SetString("scene", "ShipBottom");
 		}
 		GameController.singleton.LoadScene(GameController.GetString("scene"));
 	}
@@ -93,6 +96,8 @@ public void NewGame()
 		//Start a new game!
 		GameController.SetBool("exists", true);
 		GameController.SetInt("Checkpoint", 0);
+		GameController.SetColor("bedroomWalls", Color.white);
+		GameController.SetString("goodat", "exploring space ships");
 		for (int i = 0; i < 6; i++)
 		{
 			string charactor = (i == 0) ? "child" : "adult" + i.ToString();

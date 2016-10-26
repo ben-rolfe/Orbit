@@ -19,9 +19,8 @@ public class FactoryDispenser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		float delay = (new float[12] { 8f, 4f, 4f, 3.5f, 3.5f, 3f, 2.5f, 2f, 3f, 3f, 3f, 3f })[PlayerPrefs.GetInt("factory_level")];
+		float delay = (new float[12] { 8f, 4f, 4f, 3.5f, 3.5f, 3f, 2.5f, 2f, 3f, 3f, 3f, 3f })[GameController.GetInt("factory_level")];
 		InvokeRepeating("Dispense", delay, delay);
-
 	}
 	
 	// Update is called once per frame

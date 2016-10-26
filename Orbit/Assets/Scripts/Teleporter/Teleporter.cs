@@ -36,9 +36,8 @@ public class Teleporter : MonoBehaviour {
 		this.charactor = charactor;
 		FindObjectOfType<TeleporterAvatar>().gameObject.name = charactor;
 		isAdult = charactor != "child";
-		SetIsMale(GameController.GetBool(charactor + "_isMale"));
 		nameText.text = GameController.GetString(charactor + "_name");
-		SetSubMenu();
+		SetIsMale(GameController.GetBool(charactor + "_isMale"));
 	}
 
 	public void SetSubMenu()
@@ -110,11 +109,45 @@ public class Teleporter : MonoBehaviour {
 		{
 			SetShape(isMale ? 2 : 5, "shoes");
 			SetSubMenu("voice");
+			//Highlight and play current voice
+			int voiceNum = GameController.GetInt(charactor + "_voice");
+			if (voiceNum > 3)
+			{
+				voiceNum -= 3;
+			}
+			if (voiceNum < 1) //Shouldn't happen, but just in case the value wasn't set or has been destroyed
+			{
+				voiceNum = 1;
+			}
+			Transform voicePanel;
+			if (isMale)
+			{
+				GameController.SetInt(charactor + "_voice", 3 + voiceNum);
+				voicePanel = transform.FindChild("male_voice");
+			}
+			else
+			{
+				GameController.SetInt(charactor + "_voice", voiceNum);
+				voicePanel = transform.FindChild("female_voice");
+			}
+			if (voicePanel != null)
+			{
+				if (voicePanel.childCount >= voiceNum)
+				{
+					voicePanel.GetChild(voiceNum - 1).GetComponent<Button>().Select();
+					voicePanel.GetChild(voiceNum - 1).GetComponent<AudioSource>().Play();
+				}
+			}
+		}
+		else
+		{
+			SetSubMenu();
 		}
 
 		CustomPerson.RedressAll();
-		SetSubMenu();
 	}
+
+
 	public void SetColor(string hexCode)
 	{
 		SetColor(hexCode, colorMenu);

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class ShipAgent : MonoBehaviour {
 	Rigidbody2D rb;
-	BoxCollider2D col;
+	CircleCollider2D col;
 	Animator anim;
 
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D>();
-		col = GetComponent<BoxCollider2D>();
+		col = GetComponent<CircleCollider2D>();
 		anim = GetComponentInChildren<Animator>();
 	}
 

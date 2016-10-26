@@ -5,6 +5,12 @@ using UnityEngine.UI;
 public class Decorator : MonoBehaviour {
 	[SerializeField] Button loungeButton;
 	[SerializeField] Button bedroomButton;
+	[SerializeField] InputField goodAtField;
+
+	void Start()
+	{
+		goodAtField.text = GameController.GetString("goodat");
+	}
 
 	public void GoToBedroom()
 	{
@@ -20,7 +26,13 @@ public class Decorator : MonoBehaviour {
 	}
 	public void SetColor(string hexCode)
 	{
+		GameController.SetColor("bedroomWalls", Teleporter.HexToColor(hexCode));
 
+	}
+	public void SetGoodAt()
+	{
+		GameController.SetString("goodat", goodAtField.text);
+		FindObjectOfType<GoodAtBoard>().Refresh();
 	}
 
 }

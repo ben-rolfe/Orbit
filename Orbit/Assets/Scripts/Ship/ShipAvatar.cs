@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ShipAvatar : MonoBehaviour
 {
 	Rigidbody2D rb;
-	BoxCollider2D col;
+	CircleCollider2D col;
 	[SerializeField]
 	Slider movement;
 	[SerializeField] bool vr;
@@ -16,7 +16,7 @@ public class ShipAvatar : MonoBehaviour
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		col = GetComponent<BoxCollider2D>();
+		col = GetComponent<CircleCollider2D>();
 	}
 	void Start()
 	{

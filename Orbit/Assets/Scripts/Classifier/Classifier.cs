@@ -9,6 +9,7 @@ public class Classifier : MonoBehaviour {
 	[SerializeField] Text heading;
 	[SerializeField] Text text;
 	[SerializeField] Image icon;
+	[SerializeField] Image flag;
 	[SerializeField] Button[] buttons;
 	[SerializeField] Button needToTellButton;
 	[SerializeField] Button doNotNeedToTellButton;
@@ -101,6 +102,10 @@ public class Classifier : MonoBehaviour {
 
 	public void Setup()
 	{
+		heading.text = "";
+		text.text = "";
+		icon.color = new Color (0f, 0f, 0f, 0f);
+		flag.gameObject.SetActive(false);
 		if (GameController.GetString("prevScene") != "Sorter")
 		{
 			//If this is not a re-classification (coming back from sorter), then play the intro
@@ -108,9 +113,7 @@ public class Classifier : MonoBehaviour {
 			GameController.Directions(new string[] { "~100", debriefStub + "0", debriefStub + "1", debriefStub + "2" }); //Tiny wait, without which this wasn't working???
 			if (GameController.GetInt("classifier_level") == 0)
 			{
-				Debug.Log("HELP");
 				GameController.Directions(new string[] { "classifier_help_01", "classifier_help_02", "classifier_help_03" });
-				Debug.Log("HELP2");
 			}
 		}
 		else
@@ -122,7 +125,6 @@ public class Classifier : MonoBehaviour {
 			//If this is not a re-classification (coming back from sorter), then clear old answers. If this is a reclassification, and the answer is incorrect, clear it.
 			if (GameController.GetString("prevScene") != "Sorter" || GameController.GetBool("classifier_answer_" + i) != GameController.GetBool("classifier_response_" + i))
 			{
-				Debug.Log("BUTTONS");
 				GameController.SetBool("classifier_classified_" + i, false);
 				GameController.SetBool("classifier_response_" + i, false);
 				GameController.SetInt("classifier_type_" + i, clips[GameController.GetInt("classifier_level"), i].clipType);
@@ -135,7 +137,6 @@ public class Classifier : MonoBehaviour {
 			icons[i].sprite = iconSprites[clips[GameController.GetInt("classifier_level"), i].clipType];
 			buttons[i].GetComponentInChildren<Text>().text = clips[GameController.GetInt("classifier_level"), i].heading;
 		}
-		Debug.Log("MADE IT");
 	}
 
 	public void SelectClip(int clip)
@@ -151,6 +152,7 @@ public class Classifier : MonoBehaviour {
 		text.text = clips[GameController.GetInt("classifier_level"), clip].text;
 		icon.sprite = iconSprites[clips[GameController.GetInt("classifier_level"), clip].clipType];
 		icon.color = Color.white;
+		flag.gameObject.SetActive(flags[clip].IsActive());
 		AudioSource audioSource = GetComponent<AudioSource>();
 		if (audioSource.isPlaying)
 		{
@@ -175,6 +177,7 @@ public class Classifier : MonoBehaviour {
 		{
 			GameController.SetBool("classifier_response_" + selectedClip, value);
 			flags[selectedClip].enabled = value;
+			flag.gameObject.SetActive(value);
 		}
 
 	}

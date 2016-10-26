@@ -15,6 +15,7 @@ public class StoryTrigger : MonoBehaviour {
 		}
 	}
 
+
 	public void Trigger()
 	{
 		if (GameController.GetInt("Checkpoint") >= fromCheckpoint && GameController.GetInt("Checkpoint") <= toCheckpoint)
@@ -22,6 +23,18 @@ public class StoryTrigger : MonoBehaviour {
 			Debug.Log("Trigger fired");
 			GameController.Directions(directions);
 		}
+	}
+
+	//Separate method required, since buttons only allow a void return type. TriggerTest is called from SpeakingCharacter.Clicked
+	public bool TriggerTest()
+	{
+		if (GameController.GetInt("Checkpoint") >= fromCheckpoint && GameController.GetInt("Checkpoint") <= toCheckpoint)
+		{
+			Debug.Log("Trigger fired");
+			GameController.Directions(directions);
+			return true;
+		}
+		return false;
 	}
 
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class ShipDoor : MonoBehaviour {
 	BoxCollider2D sensor;
@@ -11,6 +12,8 @@ public class ShipDoor : MonoBehaviour {
 	int lockedFrom = 0;
 	[SerializeField]
 	int lockedTo = 0;
+	[SerializeField]
+	Button knockButton;
 
 
 	void Start()
@@ -49,6 +52,10 @@ public class ShipDoor : MonoBehaviour {
 	}
 	public void Open()
 	{
+		if (knockButton != null)
+		{
+			knockButton.gameObject.SetActive(false);
+		}
 		anim.SetBool("open", true);
 		barrier.size = new Vector2(1f, 1.5f);
 		barrier.offset = new Vector2(0f, 1.25f);

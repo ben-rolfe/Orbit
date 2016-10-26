@@ -20,7 +20,7 @@ public class FactoryBooth : MonoBehaviour {
 		sound = Camera.main.GetComponent<SoundController>();
 		sound.PlaySound("FactoryBackground", "Background", true);
 
-		robots = (new int[12] { 1, 1, 2, 2, 3, 4, 5, 6, 3, 2, 2, 3 })[PlayerPrefs.GetInt("factory_level")]; //Number of robots per level is complex
+		robots = (new int[12] { 1, 1, 2, 2, 3, 4, 5, 6, 3, 2, 2, 3 })[GameController.GetInt("factory_level")]; //Number of robots per level is complex
 		completed = 0;
 		dispensed = 0;
 		qs = GetComponentsInChildren<FactoryQueue>();

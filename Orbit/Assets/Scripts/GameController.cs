@@ -161,7 +161,10 @@ public class GameController : MonoBehaviour
 			GameController.SetString("prevScene", "Teleporter"); //TODO: Testing only
 			GameController.SetString("prevScene", "Teleporter"); //TODO: Testing only
 			GameController.SetInt("Checkpoint", 0); //TODO: Testing only
+			GameController.SetColor("bedroomWalls", Color.white);
+			GameController.SetString("goodat", "exploring space ships");
 			*/
+			GameController.SetInt("Checkpoint", 470); //TODO: Testing only
 
 			singleton = this;
 			DontDestroyOnLoad(this);
@@ -590,26 +593,26 @@ public class GameController : MonoBehaviour
 
 			//FACTORY
 			new ScriptLine("factory_01", "tau", "I'll show you how the machine works, then I'll leave you to it.");
-			new ScriptLine("factory_02", "tau", "Here's a blueprint to practice on.");
+			new ScriptLine("factory_02", "blueprintHelp", "Here's a blueprint to practice on.");
 
-			new ScriptLine("factory_arm1", "tau", "This is one of the robot's arms. Drag it onto the blueprint.");
-			new ScriptLine("factory_arm", "tau", "This the robot's other arm. Drag it onto the blueprint, too.");
-			new ScriptLine("factory_leg", "tau", "This is the robot's leg. Drag it onto the blueprint.");
-			new ScriptLine("factory_head", "tau", "This is the robot's head. Drag it onto the blueprint.");
-			new ScriptLine("factory_stomach", "tau", "This is the robot's stomach. Drag it onto the blueprint.");
+			new ScriptLine("factory_arm1", "blueprintHelp", "This is one of the robot's arms. Drag it onto the blueprint.");
+			new ScriptLine("factory_arm", "blueprintHelp", "This the robot's other arm. Drag it onto the blueprint, too.");
+			new ScriptLine("factory_leg", "blueprintHelp", "This is the robot's leg. Drag it onto the blueprint.");
+			new ScriptLine("factory_head", "blueprintHelp", "This is the robot's head. Drag it onto the blueprint.");
+			new ScriptLine("factory_stomach", "blueprintHelp", "This is the robot's stomach. Drag it onto the blueprint.");
 
-			new ScriptLine("factory_paint", "tau", "Paint is like clothes for robots. Put the paint in the paint area.");
+			new ScriptLine("factory_paint", "paintStack", "Paint is like clothes for robots. Put the paint in the paint area.");
 
-			new ScriptLine("factory_mouth", "tau", "The mouth is a private part, so don't touch it.");
-			new ScriptLine("factory_crotch", "tau", "This is the area covered by the robot's underpants. It's not okay for anyone to touch it.");
-			new ScriptLine("factory_chest", "tau", "The chest is a private part, so leave it on the conveyor belt.");
+			new ScriptLine("factory_mouth", "privateStack", "The mouth is a private part, so don't touch it.");
+			new ScriptLine("factory_crotch", "privateStack", "This is the area covered by the robot's underpants. It's not okay for anyone to touch it.");
+			new ScriptLine("factory_chest", "privateStack", "The chest is a private part, so leave it on the conveyor belt.");
 
-			new ScriptLine("factory_private_01", "tau", "Just like us, these robots have private body parts.");
-			new ScriptLine("factory_private_02", "tau", "It's not okay for anyone to touch a robot's private parts.");
-			new ScriptLine("factory_private_03", "tau", "That would be breaking the body rules.");
-			new ScriptLine("factory_private_04", "tau", "So just leave all the private parts in their boxes, and the robots will add them later.");
+			new ScriptLine("factory_private_01", "privateStack", "Just like us, these robots have private body parts.");
+			new ScriptLine("factory_private_02", "privateStack", "It's not okay for anyone to touch a robot's private parts.");
+			new ScriptLine("factory_private_03", "privateStack", "That would be breaking the body rules.");
+			new ScriptLine("factory_private_04", "privateStack", "So just leave all the private parts in their boxes, and the robots will add them later.");
 
-			new ScriptLine("factory_queue", "tau", "When the arms, legs, stomach, and head have been added to the blueprint, drag it to the painting queue.");
+			new ScriptLine("factory_queue", "queue", "When the arms, legs, stomach, and head have been added to the blueprint, drag the robot to the painting queue.");
 			new ScriptLine("factory_dressing", "tau", "Great work. The robot is in the private dressing room.");
 			new ScriptLine("factory_firstrobot", "tau", "Look at that. You've built your first robot.");
 
@@ -861,6 +864,11 @@ public class GameController : MonoBehaviour
 			{
 				Time.timeScale = 1f; // Unfreeze time
 				Invoke("FireOverlayTriggers", 0.1f); //Wait briefly after activating the layer, and before firing overlay triggers, or some of the internal objects won't be found by Find operations.
+			}
+			if (_overlay == "Main Menu")
+			{
+				//Stop the magnet animation from autoplaying.
+				FindObjectOfType<ParticleSystem>().Stop();
 			}
 		}
 	}
