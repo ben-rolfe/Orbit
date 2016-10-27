@@ -11,16 +11,26 @@ public class Menu : MonoBehaviour
 	Text loadMenuText;
 	[SerializeField]
 	Button[] loadButtons;
+	[SerializeField]
+	Button[] gameExistsButtons;
 	bool overwriteMode = false;
 
 	void Start()
 	{
-		overwriteMode = false;
-		continueButtonText.text = "Continue\n(" + GameController.GetString("child_name") + ")";
-
+		Setup();
 	}
 
-public void NewGame()
+	public void Setup()
+	{
+		overwriteMode = false;
+		foreach (Button button in gameExistsButtons)
+		{
+			button.gameObject.SetActive(GameController.slot != "");
+		}
+		continueButtonText.text = "Continue\n(" + GameController.GetString("child_name") + ")";
+	}
+
+	public void NewGame()
 	{
 		overwriteMode = false;
 		//Loop through the slots looking for an empty one.
@@ -57,6 +67,7 @@ public void NewGame()
 
 	public void OpenSavedGameMenu(bool overwrite)
 	{
+		string currentSlot = GameController.slot;
 		overwriteMode = overwrite;
 		loadMenuText.text = (overwrite) ? "Choose save slot. THIS WILL OVERWRITE THE GAME IN THAT SLOT!" : "Choose game";
 		for (int i = 0; i < 12; i++)
@@ -73,6 +84,7 @@ public void NewGame()
 				loadButtons[i].GetComponentInChildren<Text>().text = "[No Save]";
 			}
 		}
+		GameController.slot = currentSlot;
 		GameController.singleton.SetOverlay("Load Menu");
 	}
 	

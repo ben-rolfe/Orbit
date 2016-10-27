@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 
 	public static List<TestInt> tests = new List<TestInt>();
 
+
 	public Dictionary<string, ScriptLine> lines = new Dictionary<string, ScriptLine>();
 	List<string> queue = new List<string>();
 	Dictionary<int, Checkpoint> checkpoints = new Dictionary<int, Checkpoint>()
@@ -163,8 +164,8 @@ public class GameController : MonoBehaviour
 			GameController.SetInt("Checkpoint", 0); //TODO: Testing only
 			GameController.SetColor("bedroomWalls", Color.white);
 			GameController.SetString("goodat", "exploring space ships");
+			GameController.SetInt("Checkpoint", 380); //TODO: Testing only
 			*/
-			GameController.SetInt("Checkpoint", 470); //TODO: Testing only
 
 			singleton = this;
 			DontDestroyOnLoad(this);
@@ -852,6 +853,7 @@ public class GameController : MonoBehaviour
 	{
 		if (singleton.overlays.ContainsKey(overlayName))
 		{
+			overlays["Loading Indicator"].SetActive(false);
 			overlays[_overlay].SetActive(false);
 			_overlay = overlayName;
 			overlays[_overlay].SetActive(true);
@@ -868,6 +870,7 @@ public class GameController : MonoBehaviour
 			if (_overlay == "Main Menu")
 			{
 				//Stop the magnet animation from autoplaying.
+				overlays[_overlay].GetComponent<Menu>().Setup();
 				FindObjectOfType<ParticleSystem>().Stop();
 			}
 		}
@@ -927,6 +930,7 @@ public class GameController : MonoBehaviour
 
 	public void LoadScene(string sceneName, string prevSceneName)
 	{
+		overlays["Loading Indicator"].SetActive(true);
 		GameController.SetString("prevScene", prevSceneName);
 		GameController.SetString("scene", sceneName);
 		SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
