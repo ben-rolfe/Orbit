@@ -8,9 +8,11 @@ public class Draggable : MonoBehaviour {
 	public delegate void DragDelegate(Draggable obj);
 	public DragDelegate Drop = delegate (Draggable obj) { /* Do nothing by default */ };
 	public DragDelegate Grab = delegate (Draggable obj) { /* Do nothing by default */ };
+	Rigidbody2D rb;
 
 	void Start()
 	{
+		rb = GetComponent<Rigidbody2D>();
 		returnLayer = gameObject.layer;
 		zip = GetComponent<ZipTo>();
 	}
@@ -44,7 +46,8 @@ public class Draggable : MonoBehaviour {
 			if (_dragging != value)
 			{
 				_dragging = value;
-				gameObject.GetComponent<Rigidbody2D>().isKinematic = value;
+				rb.isKinematic = value;
+				rb.velocity = Vector2.zero;
 				if (_dragging)
 				{
 					Grab(this);

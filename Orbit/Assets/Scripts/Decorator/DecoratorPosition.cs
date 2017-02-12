@@ -7,8 +7,8 @@ public class DecoratorPosition : MonoBehaviour {
 
 	void Awake()
 	{
-		Debug.Log("test");
-		Debug.Log(GetComponent<SpriteRenderer>().sprite);
+//		Debug.Log("test");
+//		Debug.Log(GetComponent<SpriteRenderer>().sprite);
 		dec = GetComponent<Decoration>();
 		//Set the "no object" image to be the position's tile.
 		//Must occur before the Decoration's first Redecorate call, which happens during Start.

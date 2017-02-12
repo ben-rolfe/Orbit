@@ -5,24 +5,27 @@ using UnityEngine.UI;
 public class ShipAvatar : MonoBehaviour
 {
 	Rigidbody2D rb;
-	CircleCollider2D col;
+	CapsuleCollider2D col;
 	[SerializeField]
 	Slider movement;
-	[SerializeField] bool vr;
-	float runSpeed = 3f;
 	[SerializeField]
-	float jumpPower = 250f;
+	bool vr;
+	float runSpeed = 4f;
+	float jumpPower = 230f;
+	LayerMask jumpableLayers;
 
 	void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
-		col = GetComponent<CircleCollider2D>();
+		col = GetComponent<CapsuleCollider2D>();
 	}
 	void Start()
 	{
+		jumpableLayers = LayerMask.GetMask("Platforms", "Obstacles", "Machinery");
 		Debug.Log("Avatar Start");
 		if (vr)
 		{
+			runSpeed = 3f; // Reduce the run speed so that the player can't jump across the whole screen
 			VR vrController = FindObjectOfType<VR>();
 			if (name == "child")
 			{
@@ -62,38 +65,15 @@ public class ShipAvatar : MonoBehaviour
 		if (!rb.isKinematic && movement != null)
 		{
 			float horizontalMovement = movement.value;
-//			horizontalMovement = Input.GetAxis("Horizontal");
-//			Debug.Log(horizontalMovement);
-			//TODO: simplify this when my brain is working.
-			if (horizontalMovement < 0f)
-			{
-				if (rb.velocity.x > horizontalMovement * runSpeed)
-				{
-					rb.AddForce(Vector3.right * horizontalMovement * Mathf.Abs(rb.velocity.x - horizontalMovement * runSpeed) * 100f);
-				}
-			}
-			else
-			{
-				if (rb.velocity.x < horizontalMovement * runSpeed)
-				{
-					rb.AddForce(Vector3.right * horizontalMovement * Mathf.Abs(rb.velocity.x - horizontalMovement * runSpeed) * 100f);
-				}
-			}
-		}
-
-		if (Input.GetAxis("Vertical") > 0)
-		{
-			Jump();
+			rb.AddForce(Vector3.right * (horizontalMovement * runSpeed - rb.velocity.x) * 10f * rb.mass);
 		}
 	}
 
 	public void Jump()
 	{
-		//		Debug.Log("jump");
-		//		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")) && Physics2D.OverlapPoint(transform.position, LayerMask.GetMask("Platforms")) != null) //Using isKinematic to disable physics
-		if (!rb.isKinematic && col.IsTouchingLayers(LayerMask.GetMask("Platforms")) && rb.velocity.y <= 0) //y check is to avoid double boost
+		if (!rb.isKinematic && rb.velocity.y <= 0 && Physics2D.OverlapCircle((Vector2)transform.position + col.offset + Vector2.down * col.size.y / 2f, 0.1f, jumpableLayers) != null) //y check is to avoid double boost
 		{
-			rb.AddForce(Vector2.up * jumpPower);
+			rb.AddForce(Vector2.up * jumpPower * rb.mass);
 		}
 	}
 }

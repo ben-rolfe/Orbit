@@ -50,6 +50,14 @@ public class ShipElevator : MonoBehaviour {
 
 	public void Ride()
 	{
+		//Find any followers who aren't in the car, and move them inside.
+		foreach (GameObject follower in GameObject.FindGameObjectsWithTag("Follower"))
+		{
+			if (follower.transform.parent != car)
+			{
+				follower.transform.SetParent(car);
+			}
+		}
 		StartMove(true);
 	}
 	
@@ -59,6 +67,11 @@ public class ShipElevator : MonoBehaviour {
 		foreach(ShipAgent passenger in GetComponentsInChildren<ShipAgent>())
 		{
 			passenger.EnablePhysics(false);
+			//If any passengers are outside the car, move them inside
+			if (Mathf.Abs(passenger.transform.localPosition.x) > 0.5f)
+			{
+				passenger.transform.localPosition = new Vector3(Mathf.Sign(passenger.transform.localPosition.x) * 0.5f, passenger.transform.localPosition.y, passenger.transform.localPosition.z);
+			}
 		}
 	}
 

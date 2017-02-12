@@ -108,7 +108,7 @@ public class Menu : MonoBehaviour
 		//Start a new game!
 		GameController.SetBool("exists", true);
 		GameController.SetInt("Checkpoint", 0);
-		GameController.SetColor("bedroomWalls", Color.white);
+		GameController.SetColor("walls_paint", Teleporter.HexToColor("8888AA"));
 		GameController.SetString("goodat", "exploring space ships");
 		for (int i = 0; i < 6; i++)
 		{

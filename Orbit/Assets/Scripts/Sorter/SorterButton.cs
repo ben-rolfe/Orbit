@@ -24,7 +24,7 @@ public class SorterButton : MonoBehaviour {
 	}
 
 	public void Hit () {
-		foreach (Collider2D col in Physics2D.OverlapPointAll(transform.position)) {
+		foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, 0.1f)) {
 			if (col.GetComponent<SorterMessage>().Sort(true))
 			{
 				stars.Emit(5);

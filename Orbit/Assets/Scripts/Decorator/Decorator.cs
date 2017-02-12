@@ -26,7 +26,11 @@ public class Decorator : MonoBehaviour {
 	}
 	public void SetColor(string hexCode)
 	{
-		GameController.SetColor("bedroomWalls", Teleporter.HexToColor(hexCode));
+		GameController.SetColor("walls_paint", Teleporter.HexToColor(hexCode));
+		foreach (PaintColor paintColor in FindObjectsOfType<PaintColor>())
+		{
+			paintColor.Paint();
+		}
 
 	}
 	public void SetGoodAt()

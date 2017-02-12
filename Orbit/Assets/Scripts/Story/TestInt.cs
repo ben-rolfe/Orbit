@@ -18,7 +18,7 @@ public class TestInt : MonoBehaviour {
 
 	public void PrepareTest()
 	{
-		//The following test seems crazy, but we were getting errors when the TestInt component was destroyed, but this was still somehow being called on it.
+		//Test to make sure this isn't called on the object after it's destroyed (weird, but it was happening)
 		if (this != null)
 		{
 			if (!gameObject.activeInHierarchy)
