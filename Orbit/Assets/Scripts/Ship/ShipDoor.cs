@@ -14,11 +14,12 @@ public class ShipDoor : MonoBehaviour {
 	int lockedTo = 0;
 	[SerializeField]
 	Button knockButton;
-
+	AudioSource audioSource;
 
 	void Start()
 	{
 		anim = GetComponent<Animator>();
+		audioSource = GetComponent<AudioSource>();
 		//Find the barrier (the BoxCollider2D that isn't a trigger)
 		foreach (BoxCollider2D col in GetComponents<BoxCollider2D>())
 		{
@@ -56,6 +57,10 @@ public class ShipDoor : MonoBehaviour {
 		{
 			knockButton.gameObject.SetActive(false);
 		}
+		if (!anim.GetBool("open"))
+		{
+			audioSource.Play();
+		}
 		anim.SetBool("open", true);
 		barrier.size = new Vector2(1f, 1.5f);
 		barrier.offset = new Vector2(0f, 1.25f);
@@ -64,6 +69,10 @@ public class ShipDoor : MonoBehaviour {
 	{
 		if(cols.Count==0) //Only close door if last collider is clear
 		{
+			if (anim.GetBool("open"))
+			{
+				audioSource.Play();
+			}
 			anim.SetBool("open", false);
 			barrier.size = new Vector2(1f, 4f);
 			barrier.offset = Vector2.zero;

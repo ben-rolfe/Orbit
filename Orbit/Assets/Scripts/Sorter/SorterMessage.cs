@@ -83,7 +83,7 @@ public class SorterMessage : MonoBehaviour {
 					Vector3 pos = transform.position;
 					pos.y = 1.8f;
 					transform.position = pos;
-					HoldMessage();
+					TrashMessage();
 				}
 				break;
 			case 7:
@@ -155,21 +155,11 @@ public class SorterMessage : MonoBehaviour {
 	void ReadMessage()
 	{
 		//TODO: Score.
-		Destroy(gameObject);
-		CheckForEnd();
+		FindObjectOfType<SorterGameController>().score += (safe) ? 1 : -1;
+		TrashMessage();
 	}
 	void TrashMessage()
 	{
 		Destroy(gameObject);
-		CheckForEnd();
-	}
-	void HoldMessage()
-	{
-		//TODO: Handle this
-		CheckForEnd();
-	}
-	void CheckForEnd()
-	{
-		//TODO: If this is the final message, end the level
 	}
 }

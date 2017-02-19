@@ -14,6 +14,8 @@ public class Menu : MonoBehaviour
 	[SerializeField]
 	Button[] gameExistsButtons;
 	bool overwriteMode = false;
+	int cheatTapCount = 0;
+
 
 	void Start()
 	{
@@ -88,6 +90,20 @@ public class Menu : MonoBehaviour
 		GameController.singleton.SetOverlay("Load Menu");
 	}
 	
+	public void OpenCheatMenu()
+	{
+		if (++cheatTapCount > 9)
+		{
+			GameController.singleton.SetOverlay("Cheat Menu");
+			cheatTapCount = 0;
+		}
+	}
+
+	public void CheatToCheckPoint(int checkpoint)
+	{
+		GameController.SetInt("Checkpoint", checkpoint);
+		GameController.singleton.LoadTeleporter(0);
+	}
 
 	void StartExistingGame()
 	{

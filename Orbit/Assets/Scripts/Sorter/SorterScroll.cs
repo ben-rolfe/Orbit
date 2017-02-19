@@ -13,14 +13,14 @@ public class SorterScroll : MonoBehaviour {
 	
 	void Update()
 	{
-		if (Input.GetKeyDown("up"))
+/*		if (Input.GetKeyDown("up"))
 		{
 			track.time += 1f;
 		}
 		else if (Input.GetKeyDown("down"))
 		{
 			track.time -= 1f;
-		}
+		}*/
 		transform.position = new Vector3(-2.345f, 2f - track.time, 0f);
 	}
 

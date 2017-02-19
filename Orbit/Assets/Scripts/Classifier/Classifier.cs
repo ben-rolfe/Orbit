@@ -13,6 +13,7 @@ public class Classifier : MonoBehaviour {
 	[SerializeField] Button[] buttons;
 	[SerializeField] Button needToTellButton;
 	[SerializeField] Button doNotNeedToTellButton;
+	bool ready = false;
 	int selectedClip = -1;
 	ClassifierClip[,] clips = new ClassifierClip[9, 8]
 	{
@@ -102,17 +103,20 @@ public class Classifier : MonoBehaviour {
 
 	public void Setup()
 	{
+		float activateTime = 5f;
 		heading.text = "";
 		text.text = "";
 		icon.color = new Color (0f, 0f, 0f, 0f);
 		flag.gameObject.SetActive(false);
 		if (GameController.GetString("prevScene") != "Sorter")
 		{
+			activateTime += 10f; //approximation - different levels have different length intros - this errs on the side of being active a little too early.
 			//If this is not a re-classification (coming back from sorter), then play the intro
 			string debriefStub = "classifier_debrief_" + GameController.GetInt("classifier_level") + "_";
 			GameController.Directions(new string[] { "~100", debriefStub + "0", debriefStub + "1", debriefStub + "2" }); //Tiny wait, without which this wasn't working???
 			if (GameController.GetInt("classifier_level") == 0)
 			{
+				activateTime += 13f;
 				GameController.Directions(new string[] { "classifier_help_01", "classifier_help_02", "classifier_help_03" });
 			}
 		}
@@ -137,49 +141,59 @@ public class Classifier : MonoBehaviour {
 			icons[i].sprite = iconSprites[clips[GameController.GetInt("classifier_level"), i].clipType];
 			buttons[i].GetComponentInChildren<Text>().text = clips[GameController.GetInt("classifier_level"), i].heading;
 		}
+		Invoke("Ready", activateTime);
 	}
 
 	public void SelectClip(int clip)
 	{
-		ColorBlock colors;
-		if (selectedClip > -1)
+		if (ready)
 		{
+			ColorBlock colors;
+			if (selectedClip > -1)
+			{
+				colors = buttons[selectedClip].colors;
+				colors.normalColor = colors.highlightedColor = (GameController.GetBool("classifier_classified_" + selectedClip)) ? new Color(0.4f, 0.8f, 1f) : new Color(1f, 0.4f, 0f);
+				buttons[selectedClip].colors = colors;
+			}
+			heading.text = clips[GameController.GetInt("classifier_level"), clip].heading;
+			text.text = clips[GameController.GetInt("classifier_level"), clip].text;
+			icon.sprite = iconSprites[clips[GameController.GetInt("classifier_level"), clip].clipType];
+			icon.color = Color.white;
+			flag.gameObject.SetActive(flags[clip].IsActive());
+			AudioSource audioSource = GetComponent<AudioSource>();
+			if (audioSource.isPlaying)
+			{
+				audioSource.Stop();
+			}
+			audioSource.PlayOneShot(Resources.Load<AudioClip>("Audio/en/classifier_" + GameController.GetInt("classifier_level") + "_" + clip));
+			needToTellButton.interactable = true;
+			doNotNeedToTellButton.interactable = true;
+			selectedClip = clip;
+
 			colors = buttons[selectedClip].colors;
-			colors.normalColor = colors.highlightedColor = (GameController.GetBool("classifier_classified_" + selectedClip)) ? new Color(0.4f, 0.8f, 1f) : new Color(1f, 0.4f, 0f);
+			colors.normalColor = colors.highlightedColor = new Color(0f, 0.6f, 1f);
 			buttons[selectedClip].colors = colors;
 		}
-		heading.text = clips[GameController.GetInt("classifier_level"), clip].heading;
-		text.text = clips[GameController.GetInt("classifier_level"), clip].text;
-		icon.sprite = iconSprites[clips[GameController.GetInt("classifier_level"), clip].clipType];
-		icon.color = Color.white;
-		flag.gameObject.SetActive(flags[clip].IsActive());
-		AudioSource audioSource = GetComponent<AudioSource>();
-		if (audioSource.isPlaying)
-		{
-			audioSource.Stop();
-		}
-		audioSource.PlayOneShot(Resources.Load<AudioClip>("Audio/en/classifier_" + GameController.GetInt("classifier_level") + "_" + clip));
-		needToTellButton.interactable = true;
-		doNotNeedToTellButton.interactable = true;
-		selectedClip = clip;
-
-		colors = buttons[selectedClip].colors;
-		colors.normalColor = colors.highlightedColor = new Color(0f, 0.6f, 1f);
-		buttons[selectedClip].colors = colors;
-
 	}
 
 
 	public void SetNeedToTell(bool value)
 	{
-		GameController.SetBool("classifier_classified_" + selectedClip, true);
-		if (selectedClip > -1)
+		if (ready)
 		{
-			GameController.SetBool("classifier_response_" + selectedClip, value);
-			flags[selectedClip].enabled = value;
-			flag.gameObject.SetActive(value);
+			GameController.SetBool("classifier_classified_" + selectedClip, true);
+			if (selectedClip > -1)
+			{
+				GameController.SetBool("classifier_response_" + selectedClip, value);
+				flags[selectedClip].enabled = value;
+				flag.gameObject.SetActive(value);
+			}
 		}
+	}
 
+	public void Ready()
+	{
+		ready = true;
 	}
 
 	public void Done()

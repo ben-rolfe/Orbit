@@ -6,10 +6,11 @@ public class ShipElevator : MonoBehaviour {
 	Animator anim;
 	[SerializeField] string connectedScene;
 	Transform car;
-
+	AudioSource audioSource;
 
 	void Awake()
 	{
+		audioSource = GetComponent<AudioSource>();
 		car = transform.Find("Elevator Car");
 		//TODO: REMOVE - FOR TESTING
 		//		PlayerPrefs.SetString("prevScene", "Ship Middle");
@@ -72,6 +73,10 @@ public class ShipElevator : MonoBehaviour {
 			{
 				passenger.transform.localPosition = new Vector3(Mathf.Sign(passenger.transform.localPosition.x) * 0.5f, passenger.transform.localPosition.y, passenger.transform.localPosition.z);
 			}
+		}
+		if (ride)
+		{
+			audioSource.Play();
 		}
 	}
 
