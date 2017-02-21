@@ -666,6 +666,22 @@ public class GameController : MonoBehaviour
 			new ScriptLine("sorter_help_unflagged", "sortButtons", "You don't need to send unflagged messages to them, but it's okay if you do. You can talk to your trusted adults about anything.");
 			new ScriptLine("sorter_help_reclassify", "sortButtons", "It seems that some messages have been classified incorrectly.");
 
+			//UNSCRAMBLER
+			new ScriptLine("unscrambler_help_intro", "watchButton", "This video has been scrambled. Press the watch button to see what's wrong with it.");
+			new ScriptLine("unscrambler_help_original|0", "slotHelp0", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|1", "slotHelp1", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|2", "slotHelp2", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_original|3", "slotHelp3", "This section of the video is fine. Leave it where it is.");
+			new ScriptLine("unscrambler_help_edited|0", "slotHelp0", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|1", "slotHelp1", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|2", "slotHelp2", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_edited|3", "slotHelp3", "This section of the video has been tampered with.");
+			new ScriptLine("unscrambler_help_clips", "clipsArea", "Drag one of these clips into the timeline to replace it, then press \"watch\" again.");
+			new ScriptLine("unscrambler_help_moved|0", "slotHelp0", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|1", "slotHelp1", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|2", "slotHelp2", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+			new ScriptLine("unscrambler_help_moved|3", "slotHelp3", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
+
 			//VR GAME
 			new ScriptLine("vr_help_01", "childControls", "These controls move the child");
 			new ScriptLine("vr_help_02", "adultControls", "And these move the adult");
@@ -743,7 +759,7 @@ public class GameController : MonoBehaviour
 
 			new ScriptLine("vr_4_intro_01", "vr2", "Your brother is so good with Zynoa!");
 			new ScriptLine("vr_4_intro_02", "vr3", "I think it's good for him, too. He's always wanted a daughter of his own.");
-			new ScriptLine("vr_4_intro_01", "vr2", "Though she sure does have an active imagination!The things she tells me... Someone's been watching too many movies.");
+			new ScriptLine("vr_4_intro_03", "vr2", "Though she sure does have an active imagination!The things she tells me... Someone's been watching too many movies.");
 			new ScriptLine("vr_4_wall_01", "wall", "Zynoa's uncle always gives her gifts and takes her shopping for new clothes when she comes to visit, but he also helps her have a bath whenever she stays over.");
 			new ScriptLine("vr_4_wall_02", "wall", "He washes all of her, including her private parts, and talks about her body in ways that make her uncomfortable.");
 			new ScriptLine("vr_4_toy_01", "child", "Zynoa enjoys the compliments and gifts her uncle gives her. He's so much nicer than her parents!");
@@ -769,15 +785,14 @@ public class GameController : MonoBehaviour
 			new ScriptLine("vr_5_toy_06", "currentAdult", "Gothar isn't to blame. His boss knew he was breaking the law, even if Gothar didn't say 'no'.");
 			new ScriptLine("vr_5_toy_07", "child", "Gothar is scared. He thinks he might have broken the law when he agreed to have the photos taken.");
 			new ScriptLine("vr_5_toy_08", "currentAdult", "Gothar's boss is the one who broke the law, not Gothar. The law is made to protect children - it says if an adult breaks the body rules, it is always the adult's fault, and not the child's.");
-			new ScriptLine("vr_5_toy_07", "child", "Gothar feels like everything is his fault, since he's the one who wanted to work there in the first place.");
-			new ScriptLine("vr_5_toy_08", "currentAdult", "What happened is not Gothar's fault. Gothar wanted to work to earn his own money. He didn't know what his boss would do.");
+			new ScriptLine("vr_5_toy_09", "child", "Gothar feels like everything is his fault, since he's the one who wanted to work there in the first place.");
+			new ScriptLine("vr_5_toy_10", "currentAdult", "What happened is not Gothar's fault. Gothar wanted to work to earn his own money. He didn't know what his boss would do.");
 			new ScriptLine("vr_5_outro_01", "child", "Gothar felt really bad about himself, but it's good he realised the abuse wasn't his fault.");
 			new ScriptLine("vr_5_outro_02", "currentAdult", "When an adult tricks you into doing something that makes you feel uncomfortable, it's never your fault. I'm just glad Gothar was brave enough to tell his trusted adults.");
 
-
-			new ScriptLine("vr_6_intro_01", "vr2", "Hey, Dask!What did you think of the photos my mum took of you?");
+			new ScriptLine("vr_6_intro_01", "vr2", "Hey, Dask! What did you think of the photos my mum took of you?");
 			new ScriptLine("vr_6_intro_02", "vr1", "They were okay...");
-			new ScriptLine("vr_6_intro_01", "vr3", "Are you kidding? You looked so hot! Corda, your mum is so cool! My mum would never let me take photos like that!");
+			new ScriptLine("vr_6_intro_03", "vr3", "Are you kidding? You looked so hot! Corda, your mum is so cool! My mum would never let me take photos like that!");
 			new ScriptLine("vr_6_wall_01", "wall", "Corda had a big sleepover on the weekend, and her mother offered to take naked or almost naked photos of some of the girls, if they wanted. Some of the girls aren't sure now if they should have said no.");
 			new ScriptLine("vr_6_toy_01", "child", "Corda and her friends don't know that Corda's mum is posting the naked photos of them online for her boyfriend to see.");
 			new ScriptLine("vr_6_toy_02", "currentAdult", "Corda and her friends had no way of knowing Corda's mum would upload the photos to the internet. If someone offers to take a photo of you naked, or shows you naked photos of other people it's important to tell a trusted adult right away.");
@@ -879,22 +894,6 @@ public class GameController : MonoBehaviour
 			new ScriptLine("vr_11_toy_12", "currentAdult", "Nothar might be upset about what his mum has been doing, and he might even be angry at Elvar. It's always sad to lose a friend, but the most important thing is that Elvar is safe.");
 			new ScriptLine("vr_11_outro_01", "child", "It's sad that Nothar's mum made Elvar feel special and grown up just so she could abuse him.");
 			new ScriptLine("vr_11_outro_02", "currentAdult", "But it's a good thing Elvar had the courage to tell. Now he can feel special in ways that don't involve being unsafe.");
-
-			//UNSCRAMBLER
-			new ScriptLine("unscrambler_help_intro", "watchButton", "This video has been scrambled. Press the watch button to see what's wrong with it.");
-			new ScriptLine("unscrambler_help_original|0", "slotHelp0", "This section of the video is fine. Leave it where it is.");
-			new ScriptLine("unscrambler_help_original|1", "slotHelp1", "This section of the video is fine. Leave it where it is.");
-			new ScriptLine("unscrambler_help_original|2", "slotHelp2", "This section of the video is fine. Leave it where it is.");
-			new ScriptLine("unscrambler_help_original|3", "slotHelp3", "This section of the video is fine. Leave it where it is.");
-			new ScriptLine("unscrambler_help_edited|0", "slotHelp0", "This section of the video has been tampered with.");
-			new ScriptLine("unscrambler_help_edited|1", "slotHelp1", "This section of the video has been tampered with.");
-			new ScriptLine("unscrambler_help_edited|2", "slotHelp2", "This section of the video has been tampered with.");
-			new ScriptLine("unscrambler_help_edited|3", "slotHelp3", "This section of the video has been tampered with.");
-			new ScriptLine("unscrambler_help_clips", "clipsArea", "Drag one of these clips into the timeline to replace it, then press \"watch\" again.");
-			new ScriptLine("unscrambler_help_moved|0", "slotHelp0", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
-			new ScriptLine("unscrambler_help_moved|1", "slotHelp1", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
-			new ScriptLine("unscrambler_help_moved|2", "slotHelp2", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
-			new ScriptLine("unscrambler_help_moved|3", "slotHelp3", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
 
 
 			/*
@@ -1254,6 +1253,34 @@ public class GameController : MonoBehaviour
 					case "shake":
 						//TODO: Screen shake and vibrate
 						break;
+
+					case "showBrick":
+						{
+							VRWall wall = FindObjectOfType<VRWall>();
+							if (wall != null)
+							{
+								wall.ShowBrick();
+							}
+							else
+							{
+								NextLine();
+							}
+						}
+						break;
+					case "hideBrick":
+						{
+							VRWall wall = FindObjectOfType<VRWall>();
+							if (wall != null)
+							{
+								wall.HideBrick();
+							}
+							else
+							{
+								NextLine();
+							}
+						}
+						break;
+
 				}
 				break;
 			default: //Speak Voice Line

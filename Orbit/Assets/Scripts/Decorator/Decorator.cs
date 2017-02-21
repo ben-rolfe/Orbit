@@ -31,7 +31,7 @@ public class Decorator : MonoBehaviour {
 		{
 			paintColor.Paint();
 		}
-
+		GameController.singleton.SetOverlay("Decorator Overlay");
 	}
 	public void SetGoodAt()
 	{

@@ -7,12 +7,13 @@ public class VRLevel : MonoBehaviour
 	string[] introDirections;
 	[SerializeField]
 	string[] outroDirections;
-	VRItem[] items;
+	public VRItem[] items;
 
 	void Start()
 	{
 		items = FindObjectsOfType<VRItem>();
-		GameController.Directions(introDirections); //Would really prefer this to happen on the ship.
+		GameController.Directions(introDirections);
+		FindObjectOfType<VRWall>().activeBricks = items.Length;
 	}
 
 	public void TriggerListen()
@@ -46,10 +47,10 @@ public class VRLevel : MonoBehaviour
 			Debug.Log(activeItems);
 			if (activeItems == 0)
 			{
+				GameController.CompleteLevel("vr", GameController.GetInt("vr_level"));
 				GameController.Directions(outroDirections); //Would really prefer this to happen on the ship.
 															//If the VR game was triggered from the ship, the player should return to the deck it was triggered from.
 															//Otherwise, the player should return to the teleporter room.
-				GameController.CompleteLevel("VR", GameController.GetInt("vr_level"));
 				string returnScene = GameController.GetString("prevScene");
 				if (!returnScene.StartsWith("Ship"))
 				{

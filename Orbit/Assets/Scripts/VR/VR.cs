@@ -7,7 +7,7 @@ public class VR : MonoBehaviour {
 
 	public void SetTogetherness()
 	{
-		adult.transform.position = child.transform.position;
+		adult.transform.position = child.transform.position + Vector3.up * 0.3f; //Adding a little upness because of different collider offsets between child and adult.
 	}
 	public void SetListening()
 	{
