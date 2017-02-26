@@ -189,7 +189,7 @@ public class GameController : MonoBehaviour
 			new ScriptLine("010_4", "epsilon", "They'd only start worrying, and that would cause even more problems!");
 			new ScriptLine("010_5", "epsilon", "I've got a present for you, since you've been so nice to come and help us.");
 			new ScriptLine("010_6", "epsilon", "It's a communicator. You can call me at any time, day or night!");
-			new ScriptLine("010_7", "epsilon", "But it's a secret, okay? I only have one, and the other crew members would be jealous if they knew you had it!");
+//			new ScriptLine("010_7", "epsilon", "But it's a secret, okay? I only have one, and the other crew members would be jealous if they knew you had it!");
 			new ScriptLine("010_8", "epsilon", "If you need anything, just call me on the communicator, okay? Have fun!");
 			new ScriptLine("011_1", "helpComm", "Press the communicator to open the menu. Try it now.");
 			new ScriptLine("012_1", "helpShipMenuClose", "This is the menu. From here, you can exit the game, or play any of the minigames, once you unlock them!");

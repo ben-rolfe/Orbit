@@ -8,6 +8,8 @@ public class Menu : MonoBehaviour
 	[SerializeField]
 	Text continueButtonText;
 	[SerializeField]
+	Text versionText;
+	[SerializeField]
 	Text loadMenuText;
 	[SerializeField]
 	Button[] loadButtons;
@@ -24,6 +26,7 @@ public class Menu : MonoBehaviour
 
 	public void Setup()
 	{
+		versionText.text = "v" + Application.version;
 		overwriteMode = false;
 		foreach (Button button in gameExistsButtons)
 		{
