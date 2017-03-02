@@ -7,6 +7,8 @@ public class Compass : MonoBehaviour {
 	[SerializeField]
 	Sprite[] sprites;
 	Image image;
+	int currentSprite = -1;
+	int nextSprite = 1;
 
 	void Start()
 	{
@@ -20,20 +22,31 @@ public class Compass : MonoBehaviour {
 //			Debug.Log(Camera.main.transform.position.x + ":" + targetX);
 			if (Camera.main.transform.position.x < targetX - 1)
 			{
-				image.sprite = sprites[2];
+				nextSprite = 2;
 			}
 			else if (Camera.main.transform.position.x > targetX + 1)
 			{
-				image.sprite = sprites[0];
+				nextSprite = 0;
 			}
 			else
 			{
-				image.sprite = sprites[1];
+				nextSprite = 1;
 			}
 		}
 		else
 		{
-			image.sprite = sprites[1];
+			nextSprite = 1;
 		}
+		if (currentSprite != nextSprite)
+		{
+			currentSprite = nextSprite;
+			image.sprite = sprites[currentSprite];
+			image.rectTransform.localScale = Vector3.one * 2f;
+			Invoke("RestoreScale", 0.3f);
+		}
+	}
+	void RestoreScale()
+	{
+		image.rectTransform.localScale = Vector3.one;
 	}
 }

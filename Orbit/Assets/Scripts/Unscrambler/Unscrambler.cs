@@ -139,30 +139,24 @@ public class Unscrambler : MonoBehaviour {
 			Camera.main.orthographicSize = 2f;
 			Camera.main.transform.position = Vector3.back * 10f;
 			bool finished = true;
-			if (GameController.GetInt("unscrambler_level") == 0)
-			{
-				helpDirections = new List<string>();
-			}
+			helpDirections = new List<string>();
 
 			for (int i = 0; i < sockets.Length; i++)
 			{
 
 				int diagnosis = (solutions[i] == sockets[i].socketed.clip) ? 0 : ((solutions.Contains<int>(sockets[i].socketed.clip)) ? 1 : 2);
-				if (GameController.GetInt("unscrambler_level") == 0)
+				switch (diagnosis)
 				{
-					switch (diagnosis)
-					{
-						case 0:
-							helpDirections.Add("unscrambler_help_original|" + i);
-							break;
-						case 1:
-							helpDirections.Add("unscrambler_help_moved|" + i);
-							break;
-						case 2:
-							helpDirections.Add("unscrambler_help_edited|" + i);
-							helpDirections.Add("unscrambler_help_clips");
-							break;
-					}
+					case 0:
+						helpDirections.Add("unscrambler_help_original|" + i);
+						break;
+					case 1:
+						helpDirections.Add("unscrambler_help_moved|" + i);
+						break;
+					case 2:
+						helpDirections.Add("unscrambler_help_edited|" + i);
+						helpDirections.Add("unscrambler_help_clips");
+						break;
 				}
 				//Set diagnostic sprite
 				sockets[i].socketed.diagnostic.sprite = diagnosticSprites[diagnosis];
@@ -175,15 +169,16 @@ public class Unscrambler : MonoBehaviour {
 				}
 
 			}
-			GameController.singleton.SetOverlay("Unscrambler Overlay");
 
 			if (finished)
 			{
 				GameController.CompleteLevel("unscrambler", GameController.GetInt("unscrambler_level"));
 				GameController.singleton.LoadScene("ShipMiddle");
 			}
-			else if (GameController.GetInt("unscrambler_level") == 0)
+//			else if (GameController.GetInt("unscrambler_level") == 0)
+			else
 			{
+				GameController.singleton.SetOverlay("Unscrambler Overlay");
 				GameController.Directions(helpDirections.ToArray());
 			}
 		}

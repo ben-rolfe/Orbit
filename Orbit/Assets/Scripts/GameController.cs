@@ -132,7 +132,7 @@ public class GameController : MonoBehaviour
 		{ 530, new Checkpoint("Bring a fifth trusted adult aboard", new float[] { 30f, 24.31f, 12.98f} )},
 		{ 539, new Checkpoint("Bring a fifth trusted adult aboard", new float[] { 30f, 24.31f, 12.98f} )}, //Exit state for teleporter 5
 		{ 540, new Checkpoint("Tell your trusted adult what happened", new float[] {0f, 0f, 0f} )},
-		{ 550, new Checkpoint("It's scary, but tell your trusted adult what happened", new float[] {0f, 0f, 0f} )},
+		{ 550, new Checkpoint("It's scary, but tell your trusted adult", new float[] {0f, 0f, 0f} )},
 		{ 560, new Checkpoint("Talk to Tau", new float[] { 19f, 24.31f, 12.98f} )},
 		{ 570, new Checkpoint("Find the red button near the teleporters", new float[] {0f, 0f, 0f} )},
 		{ 580, new Checkpoint("Talk to Tau", new float[] { 19f, 24.31f, 12.98f} )},
@@ -683,10 +683,10 @@ public class GameController : MonoBehaviour
 			new ScriptLine("unscrambler_help_moved|3", "slotHelp3", "This section of the video is okay, but it's been moved. Try moving it to somewhere else in the timeline.");
 
 			//VR GAME
-			new ScriptLine("vr_help_01", "childControls", "These controls move the child");
-			new ScriptLine("vr_help_02", "adultControls", "And these move the adult");
+			new ScriptLine("vr_help_01", "helpMoveChild", "These controls move the child");
+			new ScriptLine("vr_help_02", "helpMoveAdult", "And these move the adult");
 			new ScriptLine("vr_help_03", "wall", "The goal of the game is to break down the emotional barrier that is stopping the child from talking to their trusted adults.");
-			new ScriptLine("vr_help_04", "toy", "To do this, you need to get to this toy.");
+			new ScriptLine("vr_help_04", "item0", "To do this, you need to get to this toy.");
 			new ScriptLine("vr_help_05", "understanding", "These are the special qualities of trusted adults. You need to use them to win the game.");
 			new ScriptLine("vr_help_06", "understanding", "This is \"understanding\". Hold it down to let the child jump onto the adult's shoulders, to reach high ledges, and get out of holes.");
 			new ScriptLine("vr_help_07", "togetherness", "This is \"togetherness\". Press it to move the adult to where the child is standing.");
@@ -970,7 +970,6 @@ public class GameController : MonoBehaviour
 			{
 				tests.Add(test);
 			}
-
 			//Turn on the overlay for the current scene.
 			//This will not work for scenes where the overlay is shared (e.g. ShipTop, ShipMiddle, and ShipBottom)
 			//Those scene overlays are turned on by an object within the scene (e.g. Ship Avatar)
@@ -1015,12 +1014,15 @@ public class GameController : MonoBehaviour
 	}
 	void FireOverlayTriggers()
 	{
-		//TODO: Cancel invoked actions that haven't occurred, yet
-		foreach (StoryTrigger trigger in overlays[_overlay].GetComponents<StoryTrigger>())
+		if (this == GameController.singleton)
 		{
-			trigger.Trigger();
+			Debug.Log("FIRE OVERLAY TRIGGERS");
+			//TODO: Cancel invoked actions that haven't occurred, yet
+			foreach (StoryTrigger trigger in overlays[_overlay].GetComponents<StoryTrigger>())
+			{
+				trigger.Trigger();
+			}
 		}
-
 	}
 
 
@@ -1113,7 +1115,7 @@ public class GameController : MonoBehaviour
 	}
 	public void LoadUnscrambler()
 	{
-		if (GameController.GetInt("Checkpoint") < 400)
+		if (GameController.GetInt("Checkpoint") < 420)
 		{
 			LoadUnscrambler(0);
 		}

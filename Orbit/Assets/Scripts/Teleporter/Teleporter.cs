@@ -8,6 +8,7 @@ public class Teleporter : MonoBehaviour {
 //	string charactor = "child";
 	string shapeMenu = "hair";
 	string colorMenu;
+	bool muffleVoice = true; // Muffle the voice line when the teleporter is first opened.
 	bool isMale = false;
 	bool isAdult;
 	[SerializeField] GameObject[] panels;
@@ -26,8 +27,6 @@ public class Teleporter : MonoBehaviour {
 		{
 			charactor = "adult" + GameController.GetInt("teleporter_level");
 		}
-		Debug.Log("TEST");
-		Debug.Log(charactor);
 		SetCharactor(charactor);
 	}
 
@@ -37,6 +36,7 @@ public class Teleporter : MonoBehaviour {
 		FindObjectOfType<TeleporterAvatar>().gameObject.name = charactor;
 		isAdult = charactor != "child";
 		nameText.text = GameController.GetString(charactor + "_name");
+		muffleVoice = true;
 		SetIsMale(GameController.GetBool(charactor + "_isMale"));
 	}
 
@@ -134,8 +134,15 @@ public class Teleporter : MonoBehaviour {
 			{
 				if (voicePanel.childCount >= voiceNum)
 				{
-					voicePanel.GetChild(voiceNum - 1).GetComponent<Button>().Select();
-					voicePanel.GetChild(voiceNum - 1).GetComponent<AudioSource>().Play();
+					if (muffleVoice)
+					{
+						muffleVoice = false;
+					}
+					else
+					{
+						voicePanel.GetChild(voiceNum - 1).GetComponent<Button>().Select();
+						voicePanel.GetChild(voiceNum - 1).GetComponent<AudioSource>().Play();
+					}
 				}
 			}
 		}
