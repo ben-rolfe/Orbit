@@ -169,6 +169,19 @@ public class FactoryBlueprint : MonoBehaviour {
 		if (GameController.GetInt("factory_level") == 0)
 		{
 			GameController.Directions(new string[] { "factory_queue" });
+			FactoryDispenser dispenser = FindObjectOfType<FactoryDispenser>();
+			// Sorry! Doing this because CancelInvoke to stop an invokerepeating also kills the invokerepeating that drops crates.
+			dispenser.Invoke("EmitGuideArrow", 0.3f);
+			dispenser.Invoke("EmitGuideArrow", 0.6f);
+			dispenser.Invoke("EmitGuideArrow", 0.9f);
+			dispenser.Invoke("EmitGuideArrow", 1.2f);
+			dispenser.Invoke("EmitGuideArrow", 1.5f);
+			dispenser.Invoke("EmitGuideArrow", 1.8f);
+			dispenser.Invoke("EmitGuideArrow", 2.1f);
+			dispenser.Invoke("EmitGuideArrow", 2.4f);
+			dispenser.Invoke("EmitGuideArrow", 2.7f);
+			dispenser.Invoke("EmitGuideArrow", 3f);
+
 		}
 		bc.enabled = false;
 		glow.color = Color.green;

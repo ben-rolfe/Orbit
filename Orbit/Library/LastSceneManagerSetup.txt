@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ShipBottom.unity
+- path: Assets/Scenes/Teleporter.unity
   isLoaded: 1
   isActive: 1
