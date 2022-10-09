@@ -123,12 +123,12 @@ public class Teleporter : MonoBehaviour {
 			if (isMale)
 			{
 				GameController.SetInt(charactor + "_voice", 3 + voiceNum);
-				voicePanel = transform.FindChild("male_voice");
+				voicePanel = transform.Find("male_voice");
 			}
 			else
 			{
 				GameController.SetInt(charactor + "_voice", voiceNum);
-				voicePanel = transform.FindChild("female_voice");
+				voicePanel = transform.Find("female_voice");
 			}
 			if (voicePanel != null)
 			{
